@@ -4,6 +4,26 @@
 
 Vue3+Vite+Uni-app+Pinia+TuniaoUI V3+windi.css+typescript 
 
+#### 快速开始
+
+##### 克隆项目
+
+```shell
+git clone https://gitee.com/xinjiedang/online-book.git
+```
+
+##### 使用vscode打开，安装依赖（可以用来开发项目，个人比较推荐）
+
+```shell
+yarn
+或
+npm i
+```
+
+##### 打开HBuilder X，导入项目（可以只用来运行项目）
+
+选中项目，找到编辑器菜单栏找到  运行->运行到小程序模拟器->微信开发者工具
+
 #### 说明
 
 ##### 使用vue-cli创建ui-app 项目， typescript 开发的工程
@@ -88,9 +108,7 @@ yarn add axios axios-miniprogram-adapter
 
 ##### 原型图和设计稿
 
-mastergo资源库，线上书店，
-
-
+mastergo资源社区，搜索**线上书店**，[线上书店APP界面设计-MasterGo 社区](https://mastergo.com/community/resource/9910?from=card)
 
 #### 运行截图
 
