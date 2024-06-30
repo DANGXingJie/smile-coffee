@@ -22,23 +22,23 @@ npm i
 
 ##### 打开HBuilder X，导入项目（可以只用来运行项目）
 
-选中项目，找到编辑器菜单栏找到  运行->运行到小程序模拟器->微信开发者工具
+选中项目，找到编辑器菜单栏找到  运行->运行到小程序模拟器->微信开发者工具，即可运行项目
 
-#### 说明
+#### 项目说明
 
-##### 使用vue-cli创建ui-app 项目， typescript 开发的工程
+##### 项目创建，使用vue-cli创建ui-app 项目， typescript 开发的工程
 
 ```she
 npx degit dcloudio/uni-preset-vue#vite-ts my-vue3-project
 ```
 
-##### 集成windi.css
+##### 集成windi.css 原子化css框架
 
 小程序用上原汁原味的 Tailwind/Windi CSS，文档地址：[Mini Program Tailwind Webpack Plugin (craft.me)](https://true.craft.me/Wx2f9cjGwyZYOx/x/8049AFBE-6BA8-4513-B2A7-528633DE83E8)
 
 主要是这个插件：@dcasia/mini-program-tailwind-webpack-plugin -D
 
-##### 集成Pinia
+##### 集成Pinia 状态管理
 
 文档地址：[介绍 | Pinia 中文文档 (web3doc.top)](https://pinia.web3doc.top/introduction.html)
 
@@ -96,7 +96,7 @@ export const useStore = defineStore(
 );
 ```
 
-##### 集成axios，适配微信小程序，安装这个插件
+##### 集成axios封装请求，需要适配微信小程序，安装以下这个插件
 
 ```shell
 yarn add axios axios-miniprogram-adapter
@@ -125,8 +125,8 @@ mastergo资源社区，搜索**线上书店**，[线上书店APP界面设计-Mas
 
 ```
 vue3-test
-├─ .env.development                                   //配置文件生产环境
-├─ .env.production                                    //配置文件开发环境
+├─ .env.development                                   //配置文件开发环境
+├─ .env.production                                    //配置文件生产环境
 ├─ .gitignore
 ├─ .hbuilderx
 │  └─ launch.json
