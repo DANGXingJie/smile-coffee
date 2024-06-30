@@ -1,6 +1,6 @@
 <template>
   <view>
-    <HaderMenu @showMenu="handleShowMenu" />
+    <HeaderMenu @showMenu="handleShowMenu" />
     <view class="mt-2">
       <view class="m-4">
         <TnSwiper v-model="currentSwiperIndex" next-margin="35" autoplay loop :data="swiperData" width="100%" height="337"
@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import TnSwiper from '@tuniao/tnui-vue3-uniapp/components/swiper/src/swiper.vue'
-import HaderMenu from '@/components/hader-menu.vue'
+import HeaderMenu from '@/components/header-menu.vue'
 import popupMenu from '@/components/popup-menu.vue';
 const currentSwiperIndex = ref(0)
 // 轮播图数据

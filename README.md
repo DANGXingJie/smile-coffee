@@ -141,7 +141,7 @@ vue3-test
 │  │  └─ types                                        //类型
 │  ├─ App.vue
 │  ├─ components                                      //全局组件
-│  │  ├─ hader-menu.vue
+│  │  ├─ header-menu.vue
 │  │  └─ popup-menu.vue
 │  ├─ env.d.ts
 │  ├─ hooks                                           //全局hooks
