@@ -1,5 +1,111 @@
+## uni-app 小程序 
 
-```yaml
+#### 技术栈
+
+Vue3+Vite+Uni-app+Pinia+TuniaoUI V3+windi.css+typescript 
+
+#### 说明
+
+##### 使用vue-cli创建ui-app 项目， typescript 开发的工程
+
+```she
+npx degit dcloudio/uni-preset-vue#vite-ts my-vue3-project
+```
+
+##### 集成windi.css
+
+小程序用上原汁原味的 Tailwind/Windi CSS，文档地址：[Mini Program Tailwind Webpack Plugin (craft.me)](https://true.craft.me/Wx2f9cjGwyZYOx/x/8049AFBE-6BA8-4513-B2A7-528633DE83E8)
+
+主要是这个插件：@dcasia/mini-program-tailwind-webpack-plugin -D
+
+##### 集成Pinia
+
+文档地址：[介绍 | Pinia 中文文档 (web3doc.top)](https://pinia.web3doc.top/introduction.html)
+
+如果使用HBuilder X创建的项目，无需安装pinia，已经内置
+
+使用vue-cli创建的项目
+
+```shell
+//执行 
+yarn add pinia@2.0.36
+//或
+npm install pinia@2.0.36 //安装，要固定版本
+```
+
+pinia持久化配置，文档地址：[快速开始 | pinia-plugin-persistedstate (prazdevs.github.io)](https://prazdevs.github.io/pinia-plugin-persistedstate/zh/guide/)
+
+```
+yarn add piniaPluginPersistedstate
+```
+
+持久化需要在每个业务store中单独配置
+
+```typescript
+//持久化配置
+  {
+    persist: {
+      // uni-app配置用官方的uni.getStorageSync，因为没有localstorage的说法
+      storage: {
+        getItem: uni.getStorageSync,
+        setItem: uni.setStorageSync,
+      },
+    },
+  }
+```
+
+或者安装专门为uni-app 设置的插件
+
+```shell
+npm i pinia-plugin-unistorage -D
+```
+
+持久化只需要开启：unistorage: true, 
+
+```typescript
+import { defineStore } from "pinia";
+export const useStore = defineStore(
+  "main",
+  () => {
+    const someState = ref("hello pinia");
+    return { someState };
+  },
+  {
+    unistorage: true, // 开启后对 state 的数据读写都将持久化
+  },
+);
+```
+
+##### 集成axios，适配微信小程序，安装这个插件
+
+```shell
+yarn add axios axios-miniprogram-adapter
+```
+
+##### TuniaoUI V3 组件库（Vue3 Typescript Uniapp版本）
+
+文档地址：[安装 - TuniaoUI (tuniaokj.com)](https://vue3.tuniaokj.com/doc/guide/install.html)
+
+##### 原型图和设计稿
+
+mastergo资源库，线上书店，
+
+
+
+#### 运行截图
+
+![1719745025513.png](https://img.picui.cn/free/2024/06/30/668139bfd9045.png)
+![1719745035674.png](https://img.picui.cn/free/2024/06/30/668139bfdc26e.png)
+![1719745006163.png](https://img.picui.cn/free/2024/06/30/668139c05ab5a.png)
+![1719745054272.png](https://img.picui.cn/free/2024/06/30/668139c05f558.png)
+
+
+
+
+
+#### 项目树结构
+
+```
 vue3-test
 ├─ .env.development                                   //配置文件生产环境
 ├─ .env.production                                    //配置文件开发环境
@@ -77,3 +183,6 @@ vue3-test
 └─ yarn.lock
 
 ```
+
+
+
