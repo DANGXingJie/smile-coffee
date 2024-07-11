@@ -47,10 +47,10 @@
   ],
   //分包预加载
   "preloadRule": {
-    "pages/index/index": {
-      "network": "all",
-      "packages": ["__APP__"]
-    },
+    // "pages/index/index": {
+    //   "network": "all",
+    //   "packages": ["__APP__"]
+    // },
     "subpkg_pages/login/index": {
       "network": "all",
       "packages": ["subpkg_pages"]

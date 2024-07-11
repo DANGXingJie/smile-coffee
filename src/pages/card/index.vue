@@ -1,9 +1,12 @@
 <template>
-  <view class="w-full h-[250rpx] text-center flex justify-center items-center flex-col">
-    <view>当前数值{{ count }}</view>
-    <TnButton size="lg" @click="increment" type="success">点我增加</TnButton>
-    <view>store信息:{{ cardInfo }}</view>
-    <TnButton size="lg" @click="handleLogin" type="info">登录</TnButton>
+  <view class="w-full h-[800rpx] flex flex-col">
+    <view class="w-[650rpx] flex-1 text-center m-auto mt-[50rpx] font-bold text-dark-50 flex justify-center items-center">
+      {{ cardInfo }}
+    </view>
+    <view class="w-[700rpx] h-[180rpx] m-auto flex justify-between">
+      <TnButton width="250" height="60" @click="increment" type="success">点我增加</TnButton>
+      <view class="h-[50rpx] w-[180rpx]">当前数值{{ count }}</view>
+    </view>
   </view>
 </template>
 
@@ -21,14 +24,8 @@ const testApi = () => {
   getCardList().then((res: any) => {
     console.log('===返回的数据', res)
     setCardInfo(res)
-
   })
 }
 testApi()
-const handleLogin = () => {
-  uni.navigateTo({
-    url: '/subpkg_pages/login/index'
-  });
-}
 </script>
 <style scoped></style>

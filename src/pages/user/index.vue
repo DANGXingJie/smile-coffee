@@ -1,62 +1,43 @@
 <template>
-  <view>
-    user page
-    {{ movieInfo }}
-
+  <view class="p-2 flex items-center">
+    <cover-image class="w-[120rpx] h-[120rpx]" :src="movieInfo?.user_avathor"></cover-image> {{ movieInfo?.title }}
+  </view>
+  <view class="p-2 flex items-center">
+    <cover-image class="w-[120rpx] h-[120rpx]" :src="userInfo?.avatar"></cover-image> {{ userInfo?.user_name }}
   </view>
 </template>
-
 <script setup lang="ts">
 import { getTopMovieList, getBiliSearch } from '@/api/modules/movie'
-import { getUserInfo, userLogin } from '@/api/modules/user'
+import { getUserInfo } from '@/api/modules/user'
+import type { IUserInfo, ImovieInfo } from '@/api/types/user';
 import { onLoad } from '@dcloudio/uni-app';
 import { ref } from 'vue';
-import { useUserStore } from '@/stores/modules/user';
-const userStore = useUserStore()
-
 //热播电影票房信息
 const getMovieList = async () => {
   let data = await getTopMovieList()
-  console.log("==返回的movie==data===", data)
+  //console.log("==返回的movie==data===", data)
 }
-
-const movieInfo = ref({})
+const movieInfo = ref<ImovieInfo>()
 //B站视频搜索
 const getBiliSearchInfo = async () => {
   const query = {
-    msg: 'vue',
-    n: 1,
+    msg: '明朝那些事',
+    n: 5,
   }
-  let data = await getBiliSearch(query)
-  console.log("==返回的blibli==data===", data)
+  let data: any = await getBiliSearch(query)
   movieInfo.value = data
-  console.log("movieInfo", movieInfo.value)
-}
-
-//登录
-const login = async () => {
-  const params = {
-    user_name: 'admin',
-    password: '123456',
-  }
-  let data: any = await userLogin(params)
-  console.log('%c [ 登录的data ]-44', 'font-size:13px; background:pink; color:#bf2c9f;', data)
-  //设置token
-  userStore.setToken(data.data.token)
-  console.log("==返回的data===", data)
 }
 //获取用户信息
+const userInfo = ref<IUserInfo>()
 const getUserInfoById = async () => {
   let data = await getUserInfo(3)
-  console.log("==返回的用户data===", data)
+  userInfo.value = data.data
 }
 onLoad((option) => {
   console.log("页面 onLoad:", option);
   getMovieList()
   getBiliSearchInfo()
-  //login()
   getUserInfoById()
-
 });
 </script>
 

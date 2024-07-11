@@ -122,6 +122,10 @@ class HttpRequest {
                 title: '登录过期，请重新登录',
                 icon: 'none',
               })
+              //跳转到登录页
+              uni.navigateTo({
+                url: '/subpkg_pages/login/index',
+              })
               break
             case 403:
               uni.showToast({
