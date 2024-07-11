@@ -3079,6 +3079,11 @@ axios-miniprogram-adapter@^0.3.5:
   dependencies:
     axios "^0.19.2"
 
+axios-miniprogram@latest:
+  version "2.7.2"
+  resolved "https://registry.npmmirror.com/axios-miniprogram/-/axios-miniprogram-2.7.2.tgz#3542d62f52c001b4a68c695be9ebaee4e117683e"
+  integrity sha512-XC4ZNA9siLj5s6WIRylO5aXTdVPuIOjYfY9ml3MHa7haAdPeEjsa2bnIZLQ3PB/8XvK43inUQ31CZrJZI5yMPg==
+
 axios@^0.19.2:
   version "0.19.2"
   resolved "https://registry.npmmirror.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
@@ -4945,7 +4950,7 @@ type-is@~1.6.18:
 
 typescript@^4.9.4:
   version "4.9.5"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.9.5.tgz"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 ufo@^1.5.3:

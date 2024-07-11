@@ -19,7 +19,7 @@ const { count, cardInfo } = storeToRefs(store)
 const { increment, setCardInfo } = store
 const testApi = () => {
   getCardList().then((res: any) => {
-    console.log('===返回的数据===', res)
+    console.log('===返回的数据', res)
     setCardInfo(res)
 
   })

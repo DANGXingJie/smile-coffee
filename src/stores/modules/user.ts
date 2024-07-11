@@ -9,9 +9,22 @@ export const useUserStore = defineStore(
       count.value++
     }
     const name = ref('Card Store信息')
-
-    return { count, doubleCount, increment, name }
+    const token = ref('')
+    const setToken = (value: string) => {
+      token.value = value
+    }
+    const getToken = () => {
+      return token.value
+    }
+    return { count, doubleCount, increment, name, token, setToken, getToken }
   },
   //持久化配置
-  { persist: true }
+  {
+    persist: {
+      storage: {
+        getItem: uni.getStorageSync,
+        setItem: uni.setStorageSync, // uni-app配置用官方的uni.getStorageSync，因为没有localstorage的说法
+      },
+    },
+  }
 )
