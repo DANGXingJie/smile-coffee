@@ -17,7 +17,7 @@ const userStore = useUserStore()
 //热播电影票房信息
 const getMovieList = async () => {
   let data = await getTopMovieList()
-  console.log("==返回的data===", data)
+  console.log("==返回的movie==data===", data)
 }
 
 const movieInfo = ref({})
@@ -28,7 +28,7 @@ const getBiliSearchInfo = async () => {
     n: 1,
   }
   let data = await getBiliSearch(query)
-  console.log("==返回的data===", data)
+  console.log("==返回的blibli==data===", data)
   movieInfo.value = data
   console.log("movieInfo", movieInfo.value)
 }
@@ -52,8 +52,8 @@ const getUserInfoById = async () => {
 }
 onLoad((option) => {
   console.log("页面 onLoad:", option);
-  //getMovieList()
-  //getBiliSearchInfo()
+  getMovieList()
+  getBiliSearchInfo()
   //login()
   getUserInfoById()
 

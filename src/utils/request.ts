@@ -111,39 +111,47 @@ class HttpRequest {
         // console.log(res)
         uni.hideLoading()
         let { status, data } = res
-        switch (status) {
-          case 200:
-            return data
-          case 401:
-            uni.showToast({
-              title: '登录过期，请重新登录',
-              icon: 'none',
-            })
-            break
-          case 403:
-            uni.showToast({
-              title: '没有权限',
-              icon: 'none',
-            })
-            break
-          case 404:
-            uni.showToast({
-              title: '请求的资源不存在',
-              icon: 'none',
-            })
-            break
-          case 500:
-            uni.showToast({
-              title: '服务器错误',
-              icon: 'none',
-            })
-            break
-          default:
-            uni.showToast({
-              title: '未知错误',
-              icon: 'none',
-            })
-            break
+        if (status == 200 && data.code != undefined) {
+          switch (data.code) {
+            case 1:
+              return data
+            case 200:
+              return data
+            case 401:
+              uni.showToast({
+                title: '登录过期，请重新登录',
+                icon: 'none',
+              })
+              break
+            case 403:
+              uni.showToast({
+                title: '没有权限',
+                icon: 'none',
+              })
+              break
+            case 404:
+              uni.showToast({
+                title: '请求的资源不存在',
+                icon: 'none',
+              })
+              break
+            case 500:
+              uni.showToast({
+                title: '服务器错误',
+                icon: 'none',
+              })
+              break
+            default:
+              uni.showToast({
+                title: '未知错误',
+                icon: 'none',
+              })
+              break
+          }
+        }
+        //其他不规则的请求
+        if (status == 200 || data.code == undefined) {
+          return data
         }
       },
       (err: any) => {
