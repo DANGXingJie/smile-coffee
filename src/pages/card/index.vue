@@ -18,8 +18,8 @@ const { count, cardInfo } = storeToRefs(store)
 //也可以直接结构action
 const { increment, setCardInfo } = store
 const testApi = () => {
-  getCardList({}).then((res: any) => {
-    console.log('返回的数据', res)
+  getCardList().then((res: any) => {
+    console.log('===返回的数据===', res)
     setCardInfo(res)
 
   })

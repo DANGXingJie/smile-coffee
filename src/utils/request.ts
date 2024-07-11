@@ -8,8 +8,8 @@ axios.defaults.adapter = mpAdapter as any
 class HttpRequest {
   baseURL: string
   timeout: number
-  constructor() {
-    this.baseURL = import.meta.env.VITE_BASE_URL
+  constructor(baseURL: string) {
+    this.baseURL = baseURL || import.meta.env.VITE_BASE_URL
     this.timeout = 6000
   }
   request<T = any>(options: AxiosRequestConfig): Promise<AxiosResponse<T>> {
@@ -58,6 +58,7 @@ class HttpRequest {
         // 一般会请求拦截里面加token，用于后端的验证
         /*  const token = localStorage.getItem("token")
             config!.headers!.Authorization = token
+            //租户id 
             config.headers = Object.assign(config.headers, { ...config.headers, token }); */
         return config
       },
@@ -121,4 +122,4 @@ class HttpRequest {
   }
 }
 // 默认导出Request实例
-export default new HttpRequest()
+export default HttpRequest
