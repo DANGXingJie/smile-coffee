@@ -111,13 +111,9 @@ yarn add axios axios-miniprogram-adapter
 mastergo资源社区，搜索**线上书店**，[线上书店APP界面设计-MasterGo 社区](https://mastergo.com/community/resource/9910?from=card)
 
 #### 运行截图
-
-![1719745025513.png](https://img.picui.cn/free/2024/06/30/668139bfd9045.png)
-![1719745035674.png](https://img.picui.cn/free/2024/06/30/668139bfdc26e.png)
-![1719745006163.png](https://img.picui.cn/free/2024/06/30/668139c05ab5a.png)
-![1719745054272.png](https://img.picui.cn/free/2024/06/30/668139c05f558.png)
-
-
+![1723260870964.png](https://imgos.cn/2024/08/10/66b6debfc4071.png)
+![1723260844070.png](https://imgos.cn/2024/08/10/66b6debfce24b.png)
+![1723260859897.png](https://imgos.cn/2024/08/10/66b6dec011ae7.png)
 
 
 

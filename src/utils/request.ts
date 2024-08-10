@@ -21,6 +21,7 @@ class HttpRequest {
     this.baseURL = baseURL || import.meta.env.VITE_BASE_URL
     this.timeout = 6000
   }
+
   request<T = any>(options: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     // axios 实例
     const instance = axios.create() as unknown as AxiosInstance

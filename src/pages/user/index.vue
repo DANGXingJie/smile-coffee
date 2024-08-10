@@ -37,7 +37,7 @@ onLoad((option) => {
   console.log("页面 onLoad:", option);
   getMovieList()
   getBiliSearchInfo()
-  getUserInfoById()
+  //getUserInfoById()
 });
 </script>
 

@@ -7,6 +7,6 @@ export function getTopMovieList() {
   return request.get('/wl/top/movie')
 }
 //B站视频搜索
-export function getBiliSearch(query: object) {
+export function getBiliSearch(query: ImovieQuery) {
   return request.get('/query/bilibili/video', query)
 }
