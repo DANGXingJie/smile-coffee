@@ -11,7 +11,8 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "HOME"
+        "navigationBarTitleText": "index",
+        "navigationStyle": "custom"
       }
     },
     {
@@ -68,25 +69,25 @@
         "pagePath": "pages/index/index",
         "iconPath": "static/images/home.png",
         "selectedIconPath": "static/images/home.png",
-        "text": "HOME"
+        "text": "首页"
       },
       {
         "pagePath": "pages/card/index",
         "iconPath": "static/images/card.png",
         "selectedIconPath": "static/images/card.png",
-        "text": "Cart"
+        "text": "菜单"
       },
       {
         "pagePath": "pages/favourite/index",
         "iconPath": "static/images/favourite.png",
         "selectedIconPath": "static/images/favourite.png",
-        "text": "Favourite"
+        "text": "卡包"
       },
       {
         "pagePath": "pages/user/index",
         "iconPath": "static/images/user.png",
         "selectedIconPath": "static/images/user.png",
-        "text": "User"
+        "text": "我的"
       }
     ]
   },
