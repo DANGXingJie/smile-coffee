@@ -42,6 +42,10 @@
         {
           "path": "login/index",
           "style": { "navigationBarTitleText": "login" }
+        },
+        {
+          "path": "coffee/detail",
+          "style": { "navigationBarTitleText": "" }
         }
       ]
     }

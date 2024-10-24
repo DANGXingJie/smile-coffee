@@ -16,6 +16,8 @@ export default {
       colors: {
         btnBg: '#FF902A',
         secondary: '#333333',
+        firstGray: '#B5B5B5',
+        secondGray: '#FF902A',
       },
       fontFamily: {
         sans: ['Graphik', 'sans-serif'],
