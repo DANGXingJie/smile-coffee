@@ -45,7 +45,7 @@
         },
         {
           "path": "coffee/detail",
-          "style": { "navigationBarTitleText": "" }
+          "style": { "navigationBarTitleText": "", "navigationStyle": "custom" }
         }
       ]
     }
