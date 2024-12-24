@@ -6,10 +6,10 @@ const request = new HttpRequest(baseURL)
 
 //用户登录
 export function userLogin(data: IloginUser) {
-  return request.post('/public/login', data)
+  return request.post('/user/login', data)
 }
 
 //获取用户信息
-export function getUserInfo(params: number) {
-  return request.get(`/user/getUserInfoById/${params}`)
+export function getUserInfo(params: string) {
+  return request.get(`/user/getUserInfo/${params}`)
 }

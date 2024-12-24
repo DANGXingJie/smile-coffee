@@ -1,7 +1,11 @@
 // 登录用户信息
 interface IloginUser {
-  password: string
-  user_name: string
+  appid?: string
+  code?: string
+  iv?: string
+  rawData?: string
+  signature?: string
+  encryptedData?: string
 }
 //用户个人信息
 export interface IUserInfo {

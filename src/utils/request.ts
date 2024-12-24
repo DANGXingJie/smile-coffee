@@ -112,62 +112,72 @@ class HttpRequest {
         // console.log(res)
         uni.hideLoading()
         let { status, data } = res
+        let responseData
         if (status == 200 && data.code != undefined) {
           switch (data.code) {
             case 1:
-              return data
             case 200:
-              return data
+              responseData = data
+              break
             case 401:
               uni.showToast({
                 title: '登录过期，请重新登录',
                 icon: 'none',
               })
-              //跳转到登录页
-              uni.navigateTo({
-                url: '/subpkg_pages/login/index',
-              })
+              setTimeout(() => {
+                //跳转到登录页
+                uni.navigateTo({
+                  url: '/subpkg_pages/login/index',
+                })
+              }, 1000)
+              responseData = Promise.reject(new Error('登录过期')) // 返回一个被拒绝的 Promise
               break
             case 403:
               uni.showToast({
                 title: '没有权限',
                 icon: 'none',
               })
+              responseData = Promise.reject(new Error('没有权限'))
               break
             case 404:
               uni.showToast({
                 title: '请求的资源不存在',
                 icon: 'none',
               })
+              responseData = Promise.reject(new Error('请求的资源不存在'))
               break
             case 500:
               uni.showToast({
                 title: '服务器错误',
                 icon: 'none',
               })
+              responseData = Promise.reject(new Error('服务器错误'))
               break
             default:
               uni.showToast({
                 title: '未知错误',
                 icon: 'none',
               })
+              responseData = Promise.reject(new Error('未知错误'))
               break
           }
         }
         //其他不规则的请求
         if (status == 200 || data.code == undefined) {
-          return data
+          responseData = data
         }
+        return responseData
       },
       (err: any) => {
         console.log('axios报错', err)
         uni.showToast({
-          title: '未知错误',
+          title: '请求失败，请稍后再试',
           icon: 'none',
+          duration: 2000,
+          complete: () => {
+            uni.hideLoading()
+          },
         })
-        setTimeout(function () {
-          uni.hideLoading()
-        }, 2000)
         return Promise.reject(err)
       }
     )

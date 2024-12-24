@@ -3,7 +3,7 @@
     <view class="mt-[214rpx] ml-[76rpx] w-[516rpx] h-[152px] text-[54rpx] text-left">
       Find the best coffee for you
     </view>
-    <view class="h-[36rpx] mt-[104rpx] flex ml-[76rpx]">
+    <view v-if="false" class="h-[36rpx] mt-[104rpx] flex ml-[76rpx]">
       <template v-for="(item, index) in options" :key="item.value+index">
         <view @click="onChange(item.value)" :class="currentValue === item.value ? 'bg-btnBg' : ''"
           class="text-center mr-[24rpx] w-[82rpx] h-[48rpx] rounded rounded-xl flex justify-center items-center">
@@ -11,7 +11,7 @@
       </template>
     </view>
     <view class="mt-[37rpx] m-auto w-[666rpx] h-[400rpx]">
-      <TnForm label-position="top" ref="formRef" :model="formData" :rules="formRules" hide-required-asterisk>
+      <TnForm v-if="false" label-position="top" ref="formRef" :model="formData" :rules="formRules" hide-required-asterisk>
         <TnFormItem label="" prop="user_name">
           <TnInput height="90rpx" v-model="formData.user_name">
             <template #prefix>
@@ -28,11 +28,14 @@
         </TnFormItem>
       </TnForm>
 
-      <view class="mt-[71rpx] text-right text-[26rpx] text-[#C5C5C5]">忘记密码</view>
+      <view v-if="false" class="mt-[71rpx] text-right text-[26rpx] text-[#C5C5C5]">忘记密码</view>
       <view class="m-auto mt-[261rpx] flex justify-center w-[666rpx] h-[90rpx]">
-        <TnButton text-color="#fff" bg-color="#FF902A" custom-class="rounded-[40rpx]" type="success" width="666"
+        <!-- <TnButton  text-color="#fff" bg-color="#FF902A" custom-class="rounded-[40rpx]" type="success" width="666"
           height="90" @click="submitForm"> 登录
-        </TnButton>
+        </TnButton> -->
+        <button class="bg-[#FF902A] rounded-[40rpx] w-[666rpx] h-[90rpx] text-white" open-type="getUserInfo"
+          @getuserinfo="getUserInfo"> 登录
+        </button>
       </view>
     </view>
   </view>
@@ -48,6 +51,7 @@ import type { FormRules, TnFormInstance } from '@tuniao/tnui-vue3-uniapp'
 import { useUserStore } from '@/stores/modules/user';
 import { userLogin } from '@/api/modules/user'
 import { onReady, onShow } from '@dcloudio/uni-app'
+import type { IloginUser } from '@/api/types/user'
 const userStore = useUserStore()
 //登录注册选项
 const options = reactive([
@@ -60,6 +64,8 @@ const options = reactive([
     value: 2,
   },
 ])
+
+const loginUser = reactive<IloginUser>({});
 //当前选中的选项
 const currentValue = ref(1)
 const onChange = (value: number) => {
@@ -95,51 +101,71 @@ const formRules: FormRules = {
 }
 /* 提交表单 */
 const submitForm = () => {
-  formRef.value?.validate((valid) => {
-    if (valid) {
-      //login()
-      uni.switchTab({
-        url: '/pages/index/index',
-      })
-    } else {
-      uni.showToast({
-        title: '请输入完整的表单信息',
-        icon: 'none',
+  // login()
+  // formRef.value?.validate((valid) => {
+  //   if (valid) {
+  //     //login()
+  //     uni.switchTab({
+  //       url: '/pages/index/index',
+  //     })
+  //   } else {
+  //     uni.showToast({
+  //       title: '请输入完整的表单信息',
+  //       icon: 'none',
+  //     })
+  //   }
+  // })
+}
+//获取用户信息授权
+const getUserInfo = (e: any) => {
+  console.log(e)
+  //用户同意授权则进入login
+  if (e.detail.userInfo) {
+    loginUser.encryptedData = e.detail.encryptedData
+    loginUser.iv = e.detail.iv
+    loginUser.rawData = e.detail.rawData
+    loginUser.signature = e.detail.signature
+    login()
+  }
+  else {
+    uni.showToast({
+      title: '请先授权登录',
+      icon: 'none',
+    })
+  }
+}
+
+//登录
+const login = () => {
+  uni.login({
+    provider: 'weixin', //使用微信登录
+    success: function ({ code, errMsg }) {
+      console.log(code, errMsg);
+      //用code获取用户信息
+      let appid = 'wxf44252d258f6d17f'
+      loginUser.appid = appid
+      loginUser.code = code
+      userLogin(loginUser).then((res: any) => {
+        //设置token
+        userStore.setToken(res.msg)
+        uni.showToast({
+          title: '登录成功',
+        })
+        uni.switchTab({
+          url: '/pages/user/index',
+        })
       })
     }
-  })
-}
-//登录
-const login = async () => {
-  let data: any = await userLogin(formData)
-  //设置token
-  userStore.setToken(data.data.token)
-  uni.showToast({
-    title: '登录成功',
-  })
-  uni.switchTab({
-    url: '/pages/index/index',
-  })
-}
-onReady(() => {
-  // console.log('login onShow')
-  // //动态修改状态栏的颜色
-  // uni.setNavigationBarColor({
-  //   //前景颜色
-  //   frontColor: '#ffffff',
-  //   //背景颜色
-  //   backgroundColor: '#171111'
+  });
+  // let data: any = await userLogin(formData)
+  // //设置token
+  // userStore.setToken(data.data.token)
+  // uni.showToast({
+  //   title: '登录成功',
   // })
-
-})
-</script>
-<style scoped>
-.login-bg {
-  /* background: url('../../static/images/bg-login.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  position: fixed; */
+  // uni.switchTab({
+  //   url: '/pages/index/index',
+  // })
 }
-</style>
+</script>
+<style scoped></style>
