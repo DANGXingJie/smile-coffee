@@ -1,22 +1,48 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { reactive, ref } from 'vue'
 export const useUserStore = defineStore(
   'userStore',
   () => {
-    const count = ref(0)
-    const doubleCount = computed(() => count.value * 2)
-    function increment() {
-      count.value++
-    }
-    const name = ref('Card Store信息')
     const token = ref('')
+    const userInfo = reactive({
+      id: '',
+      avatarUrl: '',
+      nickname: '',
+      phoneNumber: '',
+      username: '',
+      email: '',
+    })
     const setToken = (value: string) => {
       token.value = value
     }
     const getToken = () => {
       return token.value
     }
-    return { count, doubleCount, increment, name, token, setToken, getToken }
+    const setUserInfo = (value: any) => {
+      userInfo.id = value.id
+      userInfo.avatarUrl = value.avatarUrl
+      userInfo.nickname = value.nickname
+      userInfo.username = value.username
+      userInfo.phoneNumber = value.phoneNumber
+      userInfo.email = value.email
+    }
+    const getUserInfo = () => {
+      return userInfo
+    }
+
+    const removeUseInfo = () => {
+      userInfo.id = ''
+      userInfo.avatarUrl = ''
+      userInfo.nickname = ''
+      userInfo.username = ''
+      userInfo.phoneNumber = ''
+      userInfo.email = ''
+    }
+
+    const isLogin = () => {
+      return token.value !== ''
+    }
+    return { token, setToken, getToken, setUserInfo, getUserInfo, userInfo, removeUseInfo, isLogin }
   },
   //持久化配置
   {

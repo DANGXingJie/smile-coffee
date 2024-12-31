@@ -6,24 +6,26 @@
       <view class="flex ml-[64rpx]">
         <image class="w-[54rpx] h-[67rpx]" mode="aspectFill" src="/static/images/icon-coffer.png" />
         <view class="ml-5">
-          <view class="text-firstGray text-[26rpx]">未登录</view>
+          <view class="text-firstGray text-[26rpx] w-[120rpx]">{{
+            isLogin ? userInfo.username : "未登录" }}
+          </view>
           <view class="text-secondary text-xs mt-1">入会积分，享更多优惠</view>
         </view>
       </view>
-      <view @click="handleLogin"
+      <view v-if="isLogin" @click="handleLogin"
         class="mr-[49rpx] w-[136rpx] h-[45rpx] rounded-[22rpx] bg-[#382525] text-[#ffffff] text-[26rpx] flex items-center justify-center">
         注册/登录</view>
     </view>
   </view>
   <CategoryHeader />
   <view class="grid grid-cols-2 grid-rows-2 gap-x-[29rpx] gap-y-[33rpx] ml-[30rpx] mr-[30rpx] mt-2">
-    <template v-for="(item, index) in 4" :key="index">
-      <image class="w-[330rpx] h-[180rpx]" mode="aspectFill" src="/static/images/list-1.png" />
+    <template v-for="(item, index) in ranList" :key="index">
+      <image class="w-[330rpx] h-[180rpx]" mode="aspectFill" :src="baseURL + item.imageUrl" />
     </template>
   </view>
   <view class="mt-[33rpx]">
     <CategoryHeader :title="'大师推荐'" :is-find-all="false" />
-    <CoffeeItem />
+    <CoffeeItem :list="recommenList" />
   </view>
   <view class="mt-[38rpx]">
     <CategoryHeader :title="'专属优惠'" />
@@ -49,26 +51,81 @@
     </view>
   </view>
   <view class="h-[500rpx]">
-    <TabsHeader @change="handleChange" />
+    <TabsHeader :tabs-data="categoryList" @change="handleChange" />
     <view class="mt-[15rpx] pl-[31rpx] pr-[31rpx] grid grid-cols-2 grid-rows-1 gap-x-[30rpx]">
-      <template v-for="(item, index) in 2" :key="index">
-        <image class="w-[330rpx] h-[369rpx]" mode="aspectFill" src="/static/images/list-3.png" />
+      <template v-for="(item, index) in searchList" :key="index">
+        <image class="w-[330rpx] h-[369rpx]" mode="aspectFill" :src="baseURL + item.imageUrl" />
       </template>
     </view>
   </view>
 </template>
 <script setup lang="ts">
+import { getCategory, getRecommend, getbillboards, searchCategory } from '@/api/modules/coffee';
 import CategoryHeader from '@/components/category-header.vue'
 import CoffeeItem from '@/components/coffee-item.vue'
 import TabsHeader from '@/components/tabs-header.vue';
+import { useUserStore } from '@/stores/modules/user';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+import serviceUrls from '@/config/baseURLConfig'
+const baseURL = serviceUrls.imageService
+const store = useUserStore()
+const { userInfo } = storeToRefs(store)
+const { isLogin } = store
 const handleLogin = () => {
   uni.navigateTo({
     url: '/subpkg_pages/login/index',
   })
 }
+
+const searchParams = ref<any>({
+  categoryId: 1,
+  categoryName: '',
+  pageNum: 1,
+  pageSize: 2
+})
+
+const searchList = ref<any>([])
+//按条件搜索咖啡
+const getSearchList = async (searchParams: any) => {
+  const res = await searchCategory(searchParams)
+  searchList.value = res.data.data.records
+
+}
+
 const handleChange = (index: number) => {
   console.log(index)
+  searchParams.value.categoryId = index
+  getSearchList(searchParams.value)
 }
+
+const ranList = ref<any>([])
+//获取五月榜单
+const getRankList = () => {
+  getbillboards().then(res => {
+    ranList.value = res.data
+  })
+}
+
+const recommenList = ref<any>([])
+//获取大师推荐
+const getRecommenList = () => {
+  getRecommend().then(res => {
+    recommenList.value = res.data
+  })
+}
+//获取咖啡分类
+const categoryList = ref<any>([])
+//获取咖啡分类
+const getCoffeeList = async () => {
+  const res = await getCategory()
+  categoryList.value = res.data
+}
+getCoffeeList()
+getRecommenList()
+getRankList()
+getSearchList(searchParams.value)
+
 </script>
 
 <style scoped>

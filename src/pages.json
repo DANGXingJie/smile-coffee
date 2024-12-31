@@ -18,7 +18,8 @@
     {
       "path": "pages/card/index",
       "style": {
-        "navigationBarTitleText": "Cart"
+        "navigationBarTitleText": "Cart",
+        "onReachBottomDistance": 150
       }
     },
     {

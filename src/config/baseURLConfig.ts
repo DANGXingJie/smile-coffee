@@ -12,11 +12,13 @@ const config = {
   VITE_BASE_URL: import.meta.env.VITE_BASE_URL,
   VITE_BASE_URL_YIYAN_SERVICE: import.meta.env.VITE_BASE_URL_YIYAN_SERVICE,
   VITE_BASE_URL_MOVIE_SERVICE: import.meta.env.VITE_BASE_URL_MOVIE_SERVICE,
+  VITE_BASE_URL_IMAGE_SERVICE: import.meta.env.VITE_BASE_URL_IMAGE_SERVICE,
 }
 const serviceUrls = {
   env: config.VITE_ENV,
   baseService: config.VITE_BASE_URL,
   yiyanService: config.VITE_BASE_URL_YIYAN_SERVICE,
   moviceService: config.VITE_BASE_URL_MOVIE_SERVICE,
+  imageService: config.VITE_BASE_URL_IMAGE_SERVICE,
 }
 export default serviceUrls

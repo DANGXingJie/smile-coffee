@@ -109,7 +109,6 @@ class HttpRequest {
     // 响应拦截器
     instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        // console.log(res)
         uni.hideLoading()
         let { status, data } = res
         let responseData
@@ -162,10 +161,6 @@ class HttpRequest {
               break
           }
         }
-        //其他不规则的请求
-        if (status == 200 || data.code == undefined) {
-          responseData = data
-        }
         return responseData
       },
       (err: any) => {
@@ -174,9 +169,6 @@ class HttpRequest {
           title: '请求失败，请稍后再试',
           icon: 'none',
           duration: 2000,
-          complete: () => {
-            uni.hideLoading()
-          },
         })
         return Promise.reject(err)
       }

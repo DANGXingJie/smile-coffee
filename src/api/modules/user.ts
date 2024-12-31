@@ -13,3 +13,7 @@ export function userLogin(data: IloginUser) {
 export function getUserInfo(params: string) {
   return request.get(`/user/getUserInfo/${params}`)
 }
+//退出登录
+export function logout() {
+  return request.get('logout')
+}
