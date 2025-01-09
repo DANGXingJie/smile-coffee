@@ -1,4 +1,4 @@
-## uni-app 小程序 
+## uni-app 小程序 -微笑咖啡
 
 #### 技术栈
 
@@ -108,14 +108,16 @@ yarn add axios axios-miniprogram-adapter
 
 ##### 原型图和设计稿
 
-mastergo资源社区，搜索**线上书店**，[线上书店APP界面设计-MasterGo 社区](https://mastergo.com/community/resource/9910?from=card)
+mastergo资源社区，搜索微笑咖啡
 
 #### 运行截图
-![1723260870964.png](https://imgos.cn/2024/08/10/66b6debfc4071.png)
-![1723260844070.png](https://imgos.cn/2024/08/10/66b6debfce24b.png)
-![1723260859897.png](https://imgos.cn/2024/08/10/66b6dec011ae7.png)
+coffee分支的微笑咖啡运行截图
 
+![](https://github.com/DANGXingJie/noteRepo/blob/master/coffee/result.jpeg?raw=true)
 
+后端接口正在开发中...
+
+![](https://github.com/DANGXingJie/noteRepo/blob/master/coffee/apifox.png?raw=true)
 
 #### 项目树结构
 

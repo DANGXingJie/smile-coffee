@@ -83,3 +83,18 @@ export function customFormatDate(date, format = 'yyyy-MM-dd HH:mm:ss') {
   }
   return format.replace(/yyyy|MM|dd|HH|mm|ss/g, (match) => map[match])
 }
+
+//根据日期获取星期几，如果是本周，则返回中文星期几，否则返回日期
+export function getWeekDay(dateString: string) {
+  const date = new Date(dateString)
+  const now = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const diff = date.getTime() - today.getTime()
+  const dayOfWeek = date.getDay()
+  if (diff >= 0 && diff < 7 * 24 * 60 * 60 * 1000) {
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六']
+    return weekDays[dayOfWeek]
+  }
+  //返回默认
+  return dateString
+}
