@@ -30,20 +30,25 @@
   <view class="mt-[38rpx]">
     <CategoryHeader :title="'专属优惠'" />
     <view class="flex p-[30rpx] pt-2 justify-between">
-      <template v-for="(item, index) in 2" :key="index">
+      <template v-for="(item, index) in couponList" :key="index">
         <view class="w-[332rpx] h-[130rpx]  flex items-center">
           <view
             class="w-[166rpx] h-full bg-pink-200 rounded-[15rpx] rounded-tr-[30rpx] rounded-br-[30rpx] flex items-center justify-center">
-            <view class="relative w-[80rpx] h-[40rpx] text-[42rpx] text-[#f07373]">
-              4.2
-              <view class="absolute -bottom-[15rpx] right-0 text-[#f07373] text-[16rpx]">折</view>
+            <view v-if="item.discountType === 'percentage'"
+              class="relative w-[80rpx] h-[40rpx] text-[42rpx] text-[#f07373]">
+              {{ item.discountValue * 10 }}
+              <view class="absolute -bottom-[15rpx] right-0 text-[#f07373] text-[16rpx]">折
+              </view>
+            </view>
+            <view v-else class="relative w-[95rpx] h-[40rpx] text-[25rpx] text-[#f07373]">
+              {{ item.couponName }}
             </view>
           </view>
           <view class="h-[90rpx] border-1 border-pink-200 border-dashed">
           </view>
           <view
             class="w-[166rpx] h-full bg-pink-200 rounded-[15rpx] rounded-tl-[30rpx] rounded-bl-[30rpx] flex flex-col justify-center text-[#f07373] discount ">
-            <view class="text-[26rpx] pl-[20rpx] font-bold">指定产品</view>
+            <view class="text-[26rpx] pl-[20rpx] font-bold">{{ item.validForAllProducts === 1 ? '通用' : '指定产品' }}</view>
             <view class="text-[16rpx] pl-[20rpx] mt-1">本周日到期</view>
           </view>
         </view>
@@ -68,6 +73,8 @@ import { useUserStore } from '@/stores/modules/user';
 import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import serviceUrls from '@/config/baseURLConfig'
+import { onShow } from '@dcloudio/uni-app';
+import { getCouponList } from '@/api/modules/card';
 const baseURL = serviceUrls.imageService
 const store = useUserStore()
 const { userInfo } = storeToRefs(store)
@@ -121,11 +128,21 @@ const getCoffeeList = async () => {
   const res = await getCategory()
   categoryList.value = res.data
 }
-getCoffeeList()
-getRecommenList()
-getRankList()
-getSearchList(searchParams.value)
 
+//获取优惠券
+const couponList = ref<any>([])
+const getCouponsList = () => {
+  getCouponList({ pageNum: 1, pageSize: 2 }).then(res => {
+    couponList.value = res.data.records
+  })
+}
+onShow(() => {
+  getCoffeeList()
+  getRecommenList()
+  getRankList()
+  getCouponsList()
+  getSearchList(searchParams.value)
+})
 </script>
 
 <style scoped>

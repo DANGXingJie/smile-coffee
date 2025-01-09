@@ -30,9 +30,29 @@ import serviceUrls from '@/config/baseURLConfig'
 import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
 import { getCategory, searchCategory } from '@/api/modules/coffee';
 import { computed, ref } from 'vue';
-import { onReachBottom } from '@dcloudio/uni-app';
+import { onReachBottom, onShow } from '@dcloudio/uni-app';
 const baseURL = serviceUrls.imageService
-const searchParams = ref<any>({
+interface IsearchParams {
+  categoryId: number | undefined,
+  productName: string,
+  pageNum: number,
+  pageSize: number
+}
+interface IsearchList {
+  categoryId: number,
+  categoryName: string,
+  description: string,
+  imageUrl: string,
+  price: number,
+  productName: string,
+  productId: string
+}
+
+interface IcategoryList {
+  categoryId: string,
+  categoryName: string
+}
+const searchParams = ref<IsearchParams>({
   categoryId: undefined,
   productName: '',
   pageNum: 1,
@@ -43,7 +63,7 @@ const isLoading = ref(false)
 //总记录数
 const total = ref(0)
 //获取咖啡分类
-const categoryList = ref<any>([])
+const categoryList = ref<IcategoryList[]>([])
 //获取咖啡分类
 const getCoffeeList = () => {
   getCategory().then(res => {
@@ -53,10 +73,9 @@ const getCoffeeList = () => {
     ]
   })
 }
-getCoffeeList()
-const searchList = ref<any>([])
+const searchList = ref<IsearchList[]>([])
 //按条件搜索咖啡
-const getSearchList = (searchParams: any) => {
+const getSearchList = (searchParams: IsearchParams) => {
   isLoading.value = true
   searchCategory(searchParams).then(res => {
     searchList.value.push(...res.data.data.records)
@@ -65,7 +84,7 @@ const getSearchList = (searchParams: any) => {
   })
 }
 //搜索条件切换
-const handleChange = (index: any) => {
+const handleChange = (index: number) => {
   searchParams.value.categoryId = index
   searchParams.value.pageNum = 1
   searchList.value = []
@@ -73,7 +92,7 @@ const handleChange = (index: any) => {
 }
 
 //输入框搜索
-const handleSearch = (value: any) => {
+const handleSearch = (value: string) => {
   searchParams.value.productName = value
   searchParams.value.pageNum = 1
   searchList.value = []
@@ -96,8 +115,10 @@ const rows = computed(() => {
 });
 
 const handleDetail = (item: any) => {
+
+  console.log('%c [ item.productId ]-120', 'font-size:13px; background:pink; color:#bf2c9f;', item.productId)
   uni.navigateTo({
-    url: '/subpkg_pages/coffee/detail'
+    url: '/subpkg_pages/coffee/detail?productId=' + item.productId
   })
 }
 getSearchList(searchParams.value)
@@ -116,6 +137,17 @@ onReachBottom(() => {
   searchParams.value.pageNum += 1
   getSearchList(searchParams.value)
 })
+
+
+
+onShow(() => {
+  getCoffeeList()
+})
+
+
+
+
+
 </script>
 <style scoped>
 .grid-container {

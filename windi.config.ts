@@ -18,6 +18,9 @@ export default {
         secondary: '#333333',
         firstGray: '#B5B5B5',
         secondGray: '#FF902A',
+        failColor: '#E6E6E6',
+        successColor: '#FDEEF1',
+        successText: '#F07373',
       },
       fontFamily: {
         sans: ['Graphik', 'sans-serif'],

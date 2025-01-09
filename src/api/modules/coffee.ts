@@ -22,3 +22,13 @@ export function getCategory() {
 export function searchCategory(params: any) {
   return request.get('/products/searchProduct', params)
 }
+
+//咖啡详情
+export function getDetail(params: any) {
+  return request.get('/products/detail/' + params)
+}
+
+//咖啡属性
+export function getAttributeList() {
+  return request.get('/attributes/list')
+}

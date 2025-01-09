@@ -11,27 +11,27 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "index",
+        "navigationBarTitleText": "首页",
         "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/card/index",
       "style": {
-        "navigationBarTitleText": "Cart",
+        "navigationBarTitleText": "菜单",
         "onReachBottomDistance": 150
       }
     },
     {
       "path": "pages/favourite/index",
       "style": {
-        "navigationBarTitleText": "Favourite"
+        "navigationBarTitleText": "卡包"
       }
     },
     {
       "path": "pages/user/index",
       "style": {
-        "navigationBarTitleText": "User"
+        "navigationBarTitleText": "我的"
       }
     }
   ],
@@ -42,11 +42,11 @@
       "pages": [
         {
           "path": "login/index",
-          "style": { "navigationBarTitleText": "login" }
+          "style": { "navigationBarTitleText": "登录" }
         },
         {
           "path": "coffee/detail",
-          "style": { "navigationBarTitleText": "", "navigationStyle": "custom" }
+          "style": { "navigationBarTitleText": "菜单" }
         }
       ]
     }
@@ -99,8 +99,8 @@
 
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarTitleText": "coffee",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
   }
 }

@@ -10,8 +10,8 @@ export function userLogin(data: IloginUser) {
 }
 
 //获取用户信息
-export function getUserInfo(params: string) {
-  return request.get(`/user/getUserInfo/${params}`)
+export function getUserInfo() {
+  return request.get('/user/getUserInfo')
 }
 //退出登录
 export function logout() {

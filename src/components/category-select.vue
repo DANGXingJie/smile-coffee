@@ -4,8 +4,8 @@
     <view class="mt-[26rpx] w-[700rpx] m-auto grid grid-rows-2 grid-cols-3 gap-x-[94rpx] gap-y-[23rpx]">
       <template v-for="(item, index) in props.category" :key="index">
         <view class="w-[149rpx] flex items-center justify-center h-[51rpx] opacity-100 rounded-[10rpx]"
-          :class="curreyKey === item.id ? 'bg-btnBg text-white' : 'bg-firstGray'" @click="handleSelect(item.id)">
-          {{ item.name }}</view>
+          :class="curreyKey === item.id ? 'bg-btnBg text-white' : 'bg-firstGray'" @click="handleSelect(item)">
+          {{ item.productAttribute }}</view>
       </template>
     </view>
   </view>
@@ -14,7 +14,7 @@
 import { ref, type PropType } from 'vue'
 interface CategoryItem {
   id: number
-  name: string
+  productAttribute: string
 }
 const props = defineProps({
   category: {
@@ -55,10 +55,10 @@ const curreyKey = ref(1)
 
 const emit = defineEmits(['select'])
 
-const handleSelect = (id: number) => {
+const handleSelect = (item: any) => {
   //console.log(id)
-  curreyKey.value = id
-  emit('select', id)
+  curreyKey.value = item.id
+  emit('select', item)
 }
 </script>
 <style scoped>
