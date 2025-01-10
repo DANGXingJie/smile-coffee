@@ -1,4 +1,9 @@
-// 节流
+/**
+ * 节流
+ * @param func
+ * @param wait
+ * @returns
+ */
 export function throttle(func: (...args: any[]) => void, wait: number = 100) {
   let timeoutId: NodeJS.Timeout | null = null
   let lastExecutedTime = 0
@@ -22,7 +27,13 @@ export function throttle(func: (...args: any[]) => void, wait: number = 100) {
   }
 }
 
-//防抖
+/**
+ *
+ * @param func 防抖
+ * @param wait
+ * @param immediate
+ * @returns
+ */
 export function debounce(func: (...args: any[]) => void, wait: number = 100, immediate?: boolean) {
   let timeoutId: NodeJS.Timeout | null = null
   return function debounced(...args: any[]) {
@@ -44,7 +55,10 @@ export function debounce(func: (...args: any[]) => void, wait: number = 100, imm
   }
 }
 
-//简单深拷贝
+/**简单深拷贝
+ * @param obj
+ * @returns
+ */
 export function deepCloneByJSON<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj))
 }
@@ -83,18 +97,32 @@ export function customFormatDate(date, format = 'yyyy-MM-dd HH:mm:ss') {
   }
   return format.replace(/yyyy|MM|dd|HH|mm|ss/g, (match) => map[match])
 }
-
-//根据日期获取星期几，如果是本周，则返回中文星期几，否则返回日期
-export function getWeekDay(dateString: string) {
+/**
+ *
+ * @param dateString 根据日期字符串获取星期几
+ * @returns
+ */
+export function getWeekDay(dateString: string): string {
   const date = new Date(dateString)
   const now = new Date()
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const diff = date.getTime() - today.getTime()
-  const dayOfWeek = date.getDay()
-  if (diff >= 0 && diff < 7 * 24 * 60 * 60 * 1000) {
-    const weekDays = ['日', '一', '二', '三', '四', '五', '六']
-    return weekDays[dayOfWeek]
+  const startOfWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 1) // 假设周一为一周的开始
+  const endOfWeek = new Date(startOfWeek.getTime() + 6 * 24 * 60 * 60 * 1000) // 一周后的同一时间（不包括最后一天的时间部分）
+
+  // 检查是否在同一天
+  if (date.toDateString() === today.toDateString()) {
+    return '今天到期'
   }
-  //返回默认
-  return dateString
+
+  // 检查是否在同一周（从周一开始计算）
+  if (date >= startOfWeek && date < endOfWeek) {
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六']
+    return '本周' + weekDays[date.getDay()] + '到期'
+  }
+
+  // 如果不是本周，则返回默认（可以根据需要调整）
+  return date.toLocaleDateString() + '到期'
 }
+
+// 注意：上面的代码假设一周从周一开始，并且`dateString`是一个有效的日期字符串。
+// 在实际应用中，您应该添加对无效日期的检查，并且可能需要根据您的时区或一周的开始日来调整逻辑。

@@ -38,11 +38,16 @@ export const useUserStore = defineStore(
       userInfo.phoneNumber = ''
       userInfo.email = ''
     }
-
-    const isLogin = () => {
-      return token.value !== ''
+    const isLoginStatus = () => {
+      let isLogin = false
+      if (token.value === '' || token.value === undefined) {
+        isLogin = false
+      } else {
+        isLogin = true
+      }
+      return isLogin
     }
-    return { token, setToken, getToken, setUserInfo, getUserInfo, userInfo, removeUseInfo, isLogin }
+    return { token, setToken, getToken, setUserInfo, getUserInfo, userInfo, removeUseInfo, isLoginStatus }
   },
   //持久化配置
   {

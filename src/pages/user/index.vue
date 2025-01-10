@@ -1,8 +1,8 @@
 <template>
   <view class="flex pl-[70rpx] items-center">
-    <TnAvatar size="156" :url="userInfo.avatarUrl" />
+    <TnAvatar size="156" :url="userInfo?.avatarUrl" />
     <view class="ml-[27rpx]">
-      <view class="text-[46rpx] font-bold text-secondary">{{ userInfo.username }}</view>
+      <view class="text-[46rpx] font-bold text-secondary">{{ userInfo?.username }}</view>
       <view class="mt-[30rpx] text-[22rpx] text-[#7e7e7e]">这个人很懒，什么都还没有留下哦~</view>
     </view>
   </view>
@@ -33,11 +33,27 @@ import TnAvatar from '@tuniao/tnui-vue3-uniapp/components/avatar/src/avatar.vue'
 import TnLineProgress from '@tuniao/tnui-vue3-uniapp/components/line-progress/src/line-progress.vue'
 import menuIcon from '@/static/images/menu-icon.png'
 import menuIcon2 from '@/static/images/menu-icon1.png'
-
 import { getUserInfo, logout } from '@/api/modules/user'
 import { useUserStore } from '@/stores/modules/user'
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
+interface Iuser {
+  username: string;
+  nickName: string;
+  avatarUrl: string;
+  phoneNumber: string;
+  id: string;
+  longTerm: boolean;
+  role: string;
+  storeId: number;
+  clerkId: number;
+  storeName: string;
+  isSuper: boolean;
+  tenantId: number;
+  token: string;
+  loginTime: Date;
+  expireTime: Date;
+}
 const store = useUserStore()
 const progressPercent = ref(80)
 const handleLogin = () => {
@@ -75,7 +91,7 @@ const handleMenu = (item: any) => {
     url: item.path,
   })
 }
-const userInfo = ref<any>()
+const userInfo = ref<Iuser>()
 
 const getWxUserInfo = () => {
   getUserInfo().then((res: any) => {

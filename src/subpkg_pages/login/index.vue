@@ -152,7 +152,7 @@ const login = () => {
           title: '登录成功',
         })
         uni.switchTab({
-          url: '/pages/user/index',
+          url: '/pages/index/index',
         })
       })
     }

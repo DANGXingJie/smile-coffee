@@ -7,17 +7,17 @@
         <image class="w-[54rpx] h-[67rpx]" mode="aspectFill" src="/static/images/icon-coffer.png" />
         <view class="ml-5">
           <view class="text-firstGray text-[26rpx] w-[120rpx]">{{
-            isLogin ? userInfo.username : "未登录" }}
+            isLoginStatus() ? userInfo.username : "未登录" }}
           </view>
           <view class="text-secondary text-xs mt-1">入会积分，享更多优惠</view>
         </view>
       </view>
-      <view v-if="isLogin" @click="handleLogin"
+      <view v-if="!isLoginStatus()" @click="handleLogin"
         class="mr-[49rpx] w-[136rpx] h-[45rpx] rounded-[22rpx] bg-[#382525] text-[#ffffff] text-[26rpx] flex items-center justify-center">
         注册/登录</view>
     </view>
   </view>
-  <CategoryHeader />
+  <CategoryHeader @click="handleChangeList" />
   <view class="grid grid-cols-2 grid-rows-2 gap-x-[29rpx] gap-y-[33rpx] ml-[30rpx] mr-[30rpx] mt-2">
     <template v-for="(item, index) in ranList" :key="index">
       <image class="w-[330rpx] h-[180rpx]" mode="aspectFill" :src="baseURL + item.imageUrl" />
@@ -28,7 +28,7 @@
     <CoffeeItem :list="recommenList" />
   </view>
   <view class="mt-[38rpx]">
-    <CategoryHeader :title="'专属优惠'" />
+    <CategoryHeader @click="handleCoupon" :title="'专属优惠'" />
     <view class="flex p-[30rpx] pt-2 justify-between">
       <template v-for="(item, index) in couponList" :key="index">
         <view class="w-[332rpx] h-[130rpx]  flex items-center">
@@ -49,7 +49,7 @@
           <view
             class="w-[166rpx] h-full bg-pink-200 rounded-[15rpx] rounded-tl-[30rpx] rounded-bl-[30rpx] flex flex-col justify-center text-[#f07373] discount ">
             <view class="text-[26rpx] pl-[20rpx] font-bold">{{ item.validForAllProducts === 1 ? '通用' : '指定产品' }}</view>
-            <view class="text-[16rpx] pl-[20rpx] mt-1">本周日到期</view>
+            <view class="text-[16rpx] pl-[20rpx] mt-[15rpx]">{{ getWeekDay(item.expirationDate) }}</view>
           </view>
         </view>
       </template>
@@ -75,16 +75,18 @@ import { ref } from 'vue';
 import serviceUrls from '@/config/baseURLConfig'
 import { onShow } from '@dcloudio/uni-app';
 import { getCouponList } from '@/api/modules/card';
+import { getWeekDay } from '@/utils/common'
 const baseURL = serviceUrls.imageService
 const store = useUserStore()
 const { userInfo } = storeToRefs(store)
-const { isLogin } = store
+const { isLoginStatus } = store
+//登录
 const handleLogin = () => {
   uni.navigateTo({
     url: '/subpkg_pages/login/index',
   })
 }
-
+//搜索参数
 const searchParams = ref<any>({
   categoryId: 1,
   categoryName: '',
@@ -99,9 +101,13 @@ const getSearchList = async (searchParams: any) => {
   searchList.value = res.data.data.records
 
 }
-
+//查看更多
+const handleChangeList = () => {
+  uni.switchTab({
+    url: '/pages/menu/index'
+  });
+}
 const handleChange = (index: number) => {
-  console.log(index)
   searchParams.value.categoryId = index
   getSearchList(searchParams.value)
 }
@@ -135,6 +141,13 @@ const getCouponsList = () => {
   getCouponList({ pageNum: 1, pageSize: 2 }).then(res => {
     couponList.value = res.data.records
   })
+}
+
+//查看更多优惠券
+const handleCoupon = () => {
+  uni.switchTab({
+    url: '/pages/coupon/index'
+  });
 }
 onShow(() => {
   getCoffeeList()

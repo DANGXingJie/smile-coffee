@@ -16,14 +16,14 @@
       }
     },
     {
-      "path": "pages/card/index",
+      "path": "pages/menu/index",
       "style": {
         "navigationBarTitleText": "菜单",
         "onReachBottomDistance": 150
       }
     },
     {
-      "path": "pages/favourite/index",
+      "path": "pages/coupon/index",
       "style": {
         "navigationBarTitleText": "卡包"
       }
@@ -77,13 +77,13 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/card/index",
+        "pagePath": "pages/menu/index",
         "iconPath": "static/images/card.png",
         "selectedIconPath": "static/images/card.png",
         "text": "菜单"
       },
       {
-        "pagePath": "pages/favourite/index",
+        "pagePath": "pages/coupon/index",
         "iconPath": "static/images/favourite.png",
         "selectedIconPath": "static/images/favourite.png",
         "text": "卡包"
