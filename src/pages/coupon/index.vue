@@ -51,14 +51,24 @@ interface IRecord {
 // 当前选中的标签索引
 const currentTabIndex = ref(0)
 const tabs = ['即将过期', '已过期']
+
+const searchParams = ref({
+  pageNum: 1,
+  pageSize: 4,
+  isValid: 1
+})
+
+
 //切换标签
 const handleChange = (index: number) => {
   currentTabIndex.value = index
+  searchParams.value.isValid = index === 0 ? 1 : 2
+  getCoupon()
 }
 const couponList = ref<IRecord[]>([]);
 //获取优惠券
 const getCoupon = () => {
-  getCouponList({ pageNum: 1, pageSize: 4 }).then(res => {
+  getCouponList(searchParams.value).then(res => {
     couponList.value = res.data.records
   })
 }

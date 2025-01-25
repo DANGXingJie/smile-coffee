@@ -98,7 +98,9 @@ const searchList = ref<any>([])
 //按条件搜索咖啡
 const getSearchList = async (searchParams: any) => {
   const res = await searchCategory(searchParams)
-  searchList.value = res.data.data.records
+  searchList.value = res.data.records
+
+  console.log('%c [searchList.value====>  ]-103', 'font-size:13px; background:pink; color:#bf2c9f;', searchList.value)
 
 }
 //查看更多
@@ -138,7 +140,7 @@ const getCoffeeList = async () => {
 //获取优惠券
 const couponList = ref<any>([])
 const getCouponsList = () => {
-  getCouponList({ pageNum: 1, pageSize: 2 }).then(res => {
+  getCouponList({ pageNum: 1, pageSize: 2, isValid: 1 }).then(res => {
     couponList.value = res.data.records
   })
 }

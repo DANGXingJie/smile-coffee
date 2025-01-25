@@ -47,6 +47,10 @@
         {
           "path": "coffee/detail",
           "style": { "navigationBarTitleText": "菜单" }
+        },
+        {
+          "path": "coffee/buy",
+          "style": { "navigationBarTitleText": "确认订单", "navigationBarBackgroundColor": "#F5F5F5" }
         }
       ]
     }

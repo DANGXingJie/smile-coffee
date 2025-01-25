@@ -1,25 +1,28 @@
 <template>
-  <view class="w-full h-[800rpx] flex flex-col">
+  <view class="w-full h-screen flex flex-col">
     <SearchHeader @onSearchBtnClickEvent="handleSearch" @onClearEvent="handleClear" />
     <TabsHeader :tabsData="categoryList" class="pl-[40rpx]" @change="handleChange" />
-    <view class="grid grid-cols-2 gap-x-[42rpx] gap-y-[43rpx] pl-[35rpx] pr-[35rpx] grid-container mt-2">
-      <template v-for="(item, index) in searchList" :key="index">
-        <view class="w-[330rpx] h-[506rpx] rounded-[15rpx] opacity-100 bg-white shadow-md" @click="handleDetail(item)">
-          <image class="w-[310rpx] h-[315rpx] text-center mr-[10rpx] ml-[10rpx]" :src="baseURL + item.imageUrl"
-            mode="aspectFill" lazy-load="false" />
-          <view class="m-[12rpx] text-[28rpx] font-bold text-secondary">{{ item.productName }}</view>
-          <view class="w-full flex justify-between">
-            <view class="pl-[15rpx] text-[20rpx] text-firstGray"> {{ item.description }}</view>
-            <view class="pr-[48rpx] text-[18rpx] text-btnBg"> {{ 4.5 }}</view>
-          </view>
-          <view class="mt-2 w-full flex justify-between items-center">
-            <view class="pl-[15rpx] text-[32rpx]"><text class="mr-[7rpx]">¥</text>{{ item.price }}</view>
-            <view class="w-[102rpx] h-[69rpx] rounded-[26rpx] bg-secondGray flex justify-center items-center mr-[21rpx]">
-              <TnIcon name="add" type="info" color="#ffffff" size="22rpx" bold />
+    <view class="flex-1">
+      <view class="grid grid-cols-2 gap-x-[42rpx] gap-y-[43rpx] pl-[35rpx] pr-[35rpx] grid-container mt-2">
+        <template v-for="(item, index) in searchList" :key="index">
+          <view class="w-[330rpx] h-[506rpx] rounded-[15rpx] opacity-100 bg-white shadow-md" @click="handleDetail(item)">
+            <image class="w-[310rpx] h-[315rpx] text-center mr-[10rpx] ml-[10rpx]" :src="baseURL + item.imageUrl"
+              mode="aspectFill" lazy-load="false" />
+            <view class="m-[12rpx] text-[28rpx] font-bold text-secondary">{{ item.productName }}</view>
+            <view class="w-full flex justify-between">
+              <view class="pl-[15rpx] text-[20rpx] text-firstGray"> {{ item.description }}</view>
+              <view class="pr-[48rpx] text-[18rpx] text-btnBg"> {{ 4.5 }}</view>
+            </view>
+            <view class="mt-2 w-full flex justify-between items-center">
+              <view class="pl-[15rpx] text-[32rpx]"><text class="mr-[7rpx]">¥</text>{{ item.price }}</view>
+              <view
+                class="w-[102rpx] h-[69rpx] rounded-[26rpx] bg-secondGray flex justify-center items-center mr-[21rpx]">
+                <TnIcon name="add" type="info" color="#ffffff" size="22rpx" bold />
+              </view>
             </view>
           </view>
-        </view>
-      </template>
+        </template>
+      </view>
     </view>
   </view>
 </template>
@@ -78,9 +81,9 @@ const searchList = ref<IsearchList[]>([])
 const getSearchList = (searchParams: IsearchParams) => {
   isLoading.value = true
   searchCategory(searchParams).then(res => {
-    searchList.value.push(...res.data.data.records)
+    searchList.value.push(...res.data.records)
     isLoading.value = false
-    total.value = res.data.data.total
+    total.value = res.data.total
   })
 }
 //搜索条件切换
@@ -115,8 +118,6 @@ const rows = computed(() => {
 });
 
 const handleDetail = (item: any) => {
-
-  console.log('%c [ item.productId ]-120', 'font-size:13px; background:pink; color:#bf2c9f;', item.productId)
   uni.navigateTo({
     url: '/subpkg_pages/coffee/detail?productId=' + item.productId
   })
@@ -137,17 +138,9 @@ onReachBottom(() => {
   searchParams.value.pageNum += 1
   getSearchList(searchParams.value)
 })
-
-
-
 onShow(() => {
   getCoffeeList()
 })
-
-
-
-
-
 </script>
 <style scoped>
 .grid-container {

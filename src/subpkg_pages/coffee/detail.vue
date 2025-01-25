@@ -44,7 +44,7 @@
         <view class="mr-[22rpx]">
           <TnButton width="231rpx" plain height="82rpx" type="info">加入购物车</TnButton>
         </view>
-        <TnButton width="231rpx" height="82rpx" type="success">购买</TnButton>
+        <TnButton @click="handleBuy" width="231rpx" height="82rpx" type="success">购买</TnButton>
       </view>
     </view>
   </view>
@@ -111,6 +111,15 @@ const handleSelectHeat = (item: any) => {
 const handleSelectDensity = (item: any) => {
   console.log('%c [ 浓度 ]-24', 'font-size:13px; background:pink; color:#bf2c9f;', item)
 }
+
+//点击购买
+const handleBuy = () => {
+  uni.navigateTo({
+    url: '/subpkg_pages/coffee/buy'
+  })
+}
+
+
 getProductDetail()
 getAttributes()
 </script>
