@@ -17,3 +17,13 @@ export function getUserInfo() {
 export function logout() {
   return request.get('logout')
 }
+
+//新增收货地址
+export function saveAddress(data: any) {
+  return request.post('/addresses/sava', data)
+}
+
+//收货地址列表
+export function getAddressList(params: any) {
+  return request.get('/addresses/list/' + params)
+}

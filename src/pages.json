@@ -51,6 +51,14 @@
         {
           "path": "coffee/buy",
           "style": { "navigationBarTitleText": "确认订单", "navigationBarBackgroundColor": "#F5F5F5" }
+        },
+        {
+          "path": "coffee/shopAddress",
+          "style": { "navigationBarTitleText": "配送方式", "navigationBarBackgroundColor": "#ffffff" }
+        },
+        {
+          "path": "coffee/insertAddress",
+          "style": { "navigationBarTitleText": "添加地址", "navigationBarBackgroundColor": "#ffffff" }
         }
       ]
     }

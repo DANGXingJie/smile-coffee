@@ -4,7 +4,7 @@
     <view class="mt-[26rpx] w-[700rpx] m-auto grid grid-rows-2 grid-cols-3 gap-x-[94rpx] gap-y-[23rpx]">
       <template v-for="(item, index) in props.category" :key="index">
         <view class="w-[149rpx] flex items-center justify-center h-[51rpx] opacity-100 rounded-[10rpx]"
-          :class="curreyKey === item.id ? 'bg-btnBg text-white' : 'bg-firstGray'" @click="handleSelect(item)">
+          :class="curreyKey === index ? 'bg-btnBg text-white' : 'bg-firstGray'" @click="handleSelect(item, index)">
           {{ item.productAttribute }}</view>
       </template>
     </view>
@@ -51,13 +51,13 @@ const props = defineProps({
     default: '温度',
   },
 })
-const curreyKey = ref(1)
+const curreyKey = ref(0)
 
 const emit = defineEmits(['select'])
 
-const handleSelect = (item: any) => {
+const handleSelect = (item: any, index: number) => {
   //console.log(id)
-  curreyKey.value = item.id
+  curreyKey.value = index
   emit('select', item)
 }
 </script>

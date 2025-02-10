@@ -6,11 +6,7 @@
           <text>贵港桥圩镇店(No.A9832)</text>
           <text>></text>
         </view>
-        <view class="flex w-[210rpx] bg-gray-200 h-[65rpx] rounded-[32rpx] items-center justify-center">
-          <view class="w-[105rpx] h-[65rpx] text-white bg-blue-900 rounded-[32rpx] flex justify-center items-center">自提
-          </view>
-          <view class="w-[105rpx] h-[65rpx] rounded-[32rpx] flex justify-center items-center">外送</view>
-        </view>
+        <DeliveryMethod />
       </view>
       <view class="w-[430rpx] text-[24rpx] leading-4 text-gray-500">
         广西壮族自治区贵港市港南区桥圩镇沿江路文化街
@@ -73,16 +69,22 @@
           <view class="text-[28rpx]">应付<text class="text-[36rpx] ml-2 font-bold">¥32</text></view>
           <view class="mt-2 text-[#e46345] text-[24rpx]">总计优惠<text class="pl-1">¥19.52</text></view>
         </view>
-        <TnButton custom-class="my-btn" width="251rpx" height="82rpx" :custom-style="style">去支付</TnButton>
+        <TnButton @click="handleBuy" custom-class="my-btn" width="251rpx" height="82rpx" :custom-style="style">去支付
+        </TnButton>
       </view>
     </view>
   </view>
 </template>
 <script setup lang="ts">
+import { onShow } from '@dcloudio/uni-app';
 import TnAvatar from '@tuniao/tnui-vue3-uniapp/components/avatar/src/avatar.vue'
 import TnButton from '@tuniao/tnui-vue3-uniapp/components/button/src/button.vue'
 import TnIcon from '@tuniao/tnui-vue3-uniapp/components/icon/src/icon.vue'
+import { useProductStore } from '@/stores/modules/product'
+import DeliveryMethod from '@/components/delivery-method.vue'
+const productStore = useProductStore()
 import type { CSSProperties } from 'vue';
+import { preOrderDetail } from '@/api/modules/order';
 const style: CSSProperties = {
   fontSize: '26rpx',
   color: '#ffffff',
@@ -90,6 +92,22 @@ const style: CSSProperties = {
   borderRadius: '42rpx',
   marginRight: '20rpx'
 }
+const getPreOrderInfo = () => {
+  preOrderDetail(productStore.getPreOrderInfo()).then((res) => {
+    console.log(res)
+  })
+}
+
+
+const handleBuy = () => {
+  uni.navigateTo({
+    url: '/subpkg_pages/coffee/shopAddress',
+  })
+}
+//获取预订单信息
+onShow(() => {
+  getPreOrderInfo()
+})
 </script>
 <style>
 page {
