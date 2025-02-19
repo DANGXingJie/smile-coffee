@@ -54,7 +54,6 @@ const props = defineProps({
 const curreyKey = ref(0)
 
 const emit = defineEmits(['select'])
-
 const handleSelect = (item: any, index: number) => {
   //console.log(id)
   curreyKey.value = index
