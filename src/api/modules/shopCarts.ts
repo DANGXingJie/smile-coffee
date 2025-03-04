@@ -20,6 +20,6 @@ export function removeAll(data: any) {
 }
 
 //编辑购物车
-export function update(data: any) {
+export function updateShopCarts(data: any) {
   return request.post('/shopCart/update', data)
 }

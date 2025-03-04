@@ -15,7 +15,7 @@
         </template>
       </TnSwiper>
     </view>
-    <view class="flex-1">
+    <view class="flex-1 mb-4">
       <scroll-view class="detail-height" scroll-y>
         <view class="mt-[48rpx] ml-[55rpx] h-[50rpx] text-[36rpx] font-bold"> {{ productItem.productName }} </view>
         <view class="ml-[32rpx] mt-[16rpx]">
@@ -157,7 +157,7 @@ const getBottomHeight = () => {
     success: (res) => {
       //获取屏幕的高度
       const screenHeight = res.screenHeight
-      detailHeight.value = screenHeight - 151 + 'rpx'
+      detailHeight.value = screenHeight - 121 + 'rpx'
     },
   })
 }
@@ -180,7 +180,6 @@ const handleBuyShopCarts = async () => {
   }
   isOpenShopCart.value = !isOpenShopCart.value
 }
-
 getBottomHeight()
 getProductDetail()
 getAttributes()
